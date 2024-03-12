@@ -4,9 +4,13 @@
 
 This repository contains an API project that demonstrates three different methods of making HTTP requests: Axios, Promises, and Ajax. Each branch represents a different method and contains the respective project files.
 
-## Preview
+## API Using
 
-[Website preview](https://mzilinassim.github.io/jsonplaceholder-TP/)
+- **GET Request** `All Users` : https://jsonplaceholder.typicode.com/users
+- **GET Request** `All Posts` : https://jsonplaceholder.typicode.com/posts
+- **GET Request** `Posts Of Specific User` : https://jsonplaceholder.typicode.com/posts?userId=1
+   - Replace '1' with the ID of the user
+
 
 ## Branches
 
@@ -39,3 +43,7 @@ To get a local copy of this project and run it on your machine, follow these ste
 3. Open the project files in your IDE.
 
 4. Happy testing API Project
+
+## Preview
+
+[Website preview](https://mzilinassim.github.io/jsonplaceholder-TP/)
