@@ -1,36 +1,46 @@
-const url = "https://jsonplaceholder.typicode.com/posts?userId=1";
+(function getUsers() {
+  let request = new XMLHttpRequest();
+  request.open("GET", `https://jsonplaceholder.typicode.com/users`);
+  request.setRequestHeader("Content-type", "application/json");
+  request.responseType = "json";
 
-getUsers().then(() => getPosts());
-
-function getUsers() {
-  return axios
-    .get(url)
-    .then((response) => {
-      let { data: users } = response;
+  request.addEventListener("load", () => {
+    if (request.status >= 200 && request.status < 300) {
+      let allUsers = request.response;
       let usersUI = document.querySelector(".users");
-
-      users.map((user) => {
+      usersUI.innerHTML += "";
+      allUsers.map((user) => {
         usersUI.innerHTML += `
-        <div class="user" onclick="getPosts(${user.id}, this)" >
-          <div>username : ${user.name}</div>
-          <div>email : ${user.email}</div>
-        </div>
-      `;
+          <div class="user" onclick="getPosts(${user.id}, this)" >
+            <div>username : ${user.name}</div>
+            <div>email : ${user.email}</div>
+          </div>
+        `;
       });
-    })
-    .catch((err) => console.log(err));
-}
+    } else {
+      alert("Error 404");
+      location.href = "../";
+    }
+  });
+  request.send();
+})();
 
-function getPosts(userID = null, elem = null) {
-  let endPoint = userID ? "?userId=" + userID : "";
-  endPoint && activeElem(elem);
-  axios
-    .get(`https://jsonplaceholder.typicode.com/posts${endPoint}`)
-    .then((response) => {
-      let { data: posts } = response;
+let getPosts;
+(getPosts = function (id = null, elem = null) {
+  unActiveUsers();
+  let endPoint = id ? `?userId=${id}` : "";
+  let request = new XMLHttpRequest();
+  request.open("GET", `https://jsonplaceholder.typicode.com/posts${endPoint}`);
+  request.setRequestHeader("Content-type", "application/json");
+  request.responseType = "json";
+
+  request.addEventListener("load", () => {
+    if (request.status >= 200 && request.status < 300) {
+      let allPosts = request.response;
       let postsUI = document.querySelector(".posts");
-      postsUI.innerHTML = "Number of posts: " + posts.length;
-      posts.map((post) => {
+      elem && elem.classList.add("active");
+      postsUI.innerHTML = "";
+      allPosts.map((post) => {
         postsUI.innerHTML += `
           <div class="post">
             <div class="post_title">${post.title}</div>
@@ -38,12 +48,16 @@ function getPosts(userID = null, elem = null) {
           </div>
         `;
       });
-    });
-}
+    } else {
+      alert("Error 404");
+      location.href = "../";
+    }
+  });
+  request.send();
+})();
 
-function activeElem(elem) {
+function unActiveUsers() {
   document.querySelectorAll(".active").forEach((user) => {
     user.classList.remove("active");
   });
-  elem.classList.add("active");
 }
