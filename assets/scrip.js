@@ -1,10 +1,8 @@
-const url = "https://jsonplaceholder.typicode.com/posts?userId=1";
-
 getUsers().then(() => getPosts());
 
 function getUsers() {
   return axios
-    .get(url)
+    .get("https://jsonplaceholder.typicode.com/users")
     .then((response) => {
       let { data: users } = response;
       let usersUI = document.querySelector(".users");
