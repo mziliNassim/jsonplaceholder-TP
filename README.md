@@ -4,6 +4,10 @@
 
 This repository contains an API project that demonstrates three different methods of making HTTP requests: Axios, Promises, and Ajax. Each branch represents a different method and contains the respective project files.
 
+## Preview
+
+[Website preview](https://mzilinassim.github.io/jsonplaceholder-TP/)
+
 ## Branches
 
 1. [**Axios**](https://github.com/mziliNassim/jsonplaceholder-TP/tree/Axios): This branch demonstrates how to make HTTP requests using the Axios library.
